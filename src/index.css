@@ -1,0 +1,206 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Deploja-inspired typography using Playfair Display */
+
+@layer base {
+  :root {
+  /* === Light Mode === */
+  --background: #ffffffd2;                        /* App background in light mode */
+  --foreground: #171717;                        /* Default text color */
+
+  --card: #ffffffcd;                              /* Card background */
+  --card-foreground: #171717;                   /* Card text color */
+
+  --popover: #ffffff;                           /* Popover background */
+  --popover-foreground: #171717;                /* Popover text */
+
+  --primary: #404040;                           /* Primary buttons or highlights */
+  --primary-foreground: #ffffff;                /* Text inside primary buttons */
+
+  --secondary: #f8fafc;                         /* Secondary button background */
+  --secondary-foreground: #404040;              /* Text in secondary buttons */
+
+  --muted: #f8fafc;                              /* Muted background */
+  --muted-foreground: #737373;                  /* Muted text */
+
+  --accent: #f3f4f6;                            /* Accent elements (chips, badges) */
+  --accent-foreground: #171717;                 /* Text on accent elements */
+
+  --destructive: #dc2626;                       /* Danger elements (e.g. delete buttons) */
+  --destructive-foreground: #f8fafc;            /* Text on destructive elements */
+
+  --border: #e5e7eb;                            /* Border color for cards, inputs, etc. */
+  --input: #e5e7eb;                             /* Input field background or border */
+  --ring: #404040;                              /* Focus ring */
+
+  --radius: 0.75rem;                            /* Border radius for components */
+
+  /* Sidebar-specific tokens */
+  --sidebar-background: #ffffff;                /* Sidebar background */
+  --sidebar-foreground: #171717;                /* Sidebar text */
+  --sidebar-primary: #404040;                   /* Primary buttons or highlights in sidebar */
+  --sidebar-primary-foreground: #ffffff;        /* Text on sidebar primary buttons */
+  --sidebar-accent: #f8fafc;                    /* Sidebar accent background */
+  --sidebar-accent-foreground: #171717;         /* Text on sidebar accent background */
+  --sidebar-border: #e5e7eb;                    /* Sidebar borders */
+  --sidebar-ring: #404040;                      /* Sidebar focus ring */
+}
+
+.dark {
+  /* === Dark Mode === */
+  --background: #09090b;                        /* App background in dark mode */
+  --foreground: #fafafa;                        /* Default text color in dark mode */
+
+  --card: #18181b;                              /* Card background in dark mode */
+  --card-foreground: #fafafa;                   /* Card text in dark mode */
+
+  --popover: #18181b;                           /* Popover background in dark mode */
+  --popover-foreground: #fafafa;                /* Popover text in dark mode */
+
+  --primary: #d4d4d8;                           /* Primary highlight color */
+  --primary-foreground: #171717;                /* Text on primary color */
+
+  --secondary: #27272a;                         /* Secondary background color */
+  --secondary-foreground: #fafafa;              /* Secondary text color */
+
+  --muted: #27272a;                             /* Muted background in dark mode */
+  --muted-foreground: #a1a1aa;                  /* Muted text in dark mode */
+
+  --accent: #27272a;                            /* Accent UI background */
+  --accent-foreground: #fafafa;                 /* Accent text color */
+
+  --destructive: #dc2626;                       /* Destructive color (e.g. delete buttons) */
+  --destructive-foreground: #fafafa;            /* Text on destructive color */
+
+  --border: #27272a;                            /* Border color in dark mode */
+  --input: #27272a;                             /* Input background or border in dark mode */
+  --ring: #d4d4d8;                              /* Focus ring color in dark mode */
+
+  /* Sidebar-specific tokens */
+  --sidebar-background: #09090b;                /* Sidebar background in dark mode */
+  --sidebar-foreground: #fafafa;                /* Sidebar text color */
+  --sidebar-primary: #d4d4d8;                   /* Sidebar primary highlight color */
+  --sidebar-primary-foreground: #171717;        /* Sidebar primary text */
+  --sidebar-accent: #18181b;                    /* Sidebar accent background */
+  --sidebar-accent-foreground: #fafafa;         /* Sidebar accent text */
+  --sidebar-border: #27272a;                    /* Sidebar borders */
+  --sidebar-ring: #d4d4d8;                      /* Sidebar focus ring */
+}
+
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  }
+
+  /* Remove default browser focus outlines */
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Ensure custom focus styles still work */
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: none !important;
+  }
+
+  /* Deploja-inspired typography */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .hero-title-italic {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-style: italic;
+  }
+}
+
+@layer components {
+  /* Clean glass effects matching KIMI design */
+  .glass {
+    @apply backdrop-blur-xl bg-white/80 border border-gray-200/50;
+  }
+
+  .glass-dark {
+    @apply backdrop-blur-xl bg-black/60 border border-gray-800/50;
+  }
+
+  .glass-hover {
+    @apply hover:bg-white/90 transition-all duration-300;
+  }
+
+  .glass-hover-dark {
+    @apply hover:bg-black/70 transition-all duration-300;
+  }
+
+  /* Ocean-inspired background */
+  .ocean-hero {
+    background-image: url("https://images.unsplash.com/photo-1500375592092-40eb2168fd21?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* Deploja-inspired gradients */
+  .deploja-gradient {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.3) 100%);
+  }
+
+  /* Clean button styles */
+  .kimi-button {
+    @apply bg-gray-900 text-white hover:bg-gray-800 transition-all duration-200 rounded-xl px-6 py-3 font-medium;
+  }
+
+  .kimi-button-light {
+    @apply bg-white text-gray-900 hover:bg-gray-50 border border-gray-200 transition-all duration-200 rounded-xl px-6 py-3 font-medium;
+  }
+}
+
+/* Clean scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(107, 114, 128, 0.3);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(107, 114, 128, 0.5);
+}
+
+/* Dark mode scrollbar */
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.3);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.5);
+}
