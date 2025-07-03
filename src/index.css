@@ -1,0 +1,280 @@
+/* Load Tailwind's layers */
+@tailwind base;        /* Base reset styles (e.g., Normalize.css) */
+@tailwind components;  /* Your custom components and Tailwind plugins */
+@tailwind utilities;   /* Utility classes (margin, padding, color, etc.) */
+
+/* -------------------------------------
+   Deploja-Inspired Typography & Theme
+-------------------------------------- */
+
+@layer base {
+  :root {
+    /* === LIGHT MODE === */
+
+    /* --- Background gradient for entire light theme body --- */
+    --background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 1) 0%,    /* White */
+      rgba(252, 252, 252, 1) 5%,    /* Slightly off-white */
+      rgba(250, 250, 250, 1) 10%,   /* ...gets gradually darker */
+      rgba(248, 248, 248, 1) 15%,
+      rgba(245, 245, 245, 1) 20%,
+      rgba(242, 242, 242, 1) 25%,
+      rgba(240, 240, 240, 1) 30%,
+      rgba(237, 237, 237, 1) 35%,
+      rgba(235, 235, 235, 1) 40%,
+      rgba(232, 232, 232, 1) 45%,
+      rgba(230, 230, 230, 1) 50%,
+      rgba(228, 228, 228, 1) 55%,
+      rgba(225, 225, 225, 1) 60%,
+      rgba(222, 222, 222, 1) 65%,
+      rgba(220, 220, 220, 1) 70%,
+      rgba(217, 217, 217, 1) 75%,
+      rgba(215, 215, 215, 1) 80%,
+      rgba(212, 212, 212, 1) 85%,
+      rgba(210, 210, 210, 1) 90%,
+      rgba(207, 207, 207, 1) 95%,
+      rgba(205, 205, 205, 1) 100%    /* Soft gray at far right */
+    );
+
+    /* --- Primary foreground text color --- */
+    --foreground: #171717;
+
+    /* --- Card backgrounds & text --- */
+    --card: #ffffffcd;                 /* Semi-transparent white */
+    --card-foreground: #171717;
+
+    /* --- Popover (tooltips/menus) background/text --- */
+    --popover: #ffffff;
+    --popover-foreground: #171717;
+
+    /* --- Primary UI color (e.g., buttons, links) --- */
+    --primary: #404040;
+    --primary-foreground: #ffffff;
+
+    /* --- Secondary elements (badges, labels) --- */
+    --secondary: #f8fafc;
+    --secondary-foreground: #404040;
+
+    /* --- Muted UI (disabled or subtle text) --- */
+    --muted: #f8fafc;
+    --muted-foreground: #737373;
+
+    /* --- Accent color (highlighting, UI accents) --- */
+    --accent: #f3f4f6;
+    --accent-foreground: #171717;
+
+    /* --- Destructive actions (delete, warnings) --- */
+    --destructive: #dc2626;               /* Red */
+    --destructive-foreground: #f8fafc;
+
+    /* --- Borders, Inputs, Rings --- */
+    --border: #e5e7eb;                    /* Gray-200 */
+    --input: #e5e7eb;
+    --ring: #404040;
+
+    /* --- Border radius for UI elements --- */
+    --radius: 0.75rem;                    /* 12px rounded corners */
+
+    /* --- Sidebar styling --- */
+    --sidebar-background: #ffffffcd;
+    --sidebar-foreground: #171717;
+    --sidebar-primary: #404040;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #f8fafc;
+    --sidebar-accent-foreground: #171717;
+    --sidebar-border: #e5e7eb;
+    --sidebar-ring: #404040;
+  }
+
+  .dark {
+    /* === DARK MODE === */
+
+    /* Background: solid fallback (commented gradient above) */
+    --background: #202024;
+
+    /* General text color */
+    --foreground: #f1f1f1;
+
+    /* Cards */
+    --card: #2f2f34;
+    --card-foreground: #f1f1f1;
+    --card-border: #727276;
+
+
+    
+    /* Popovers */
+    --popover: #18181b;
+    --popover-foreground: #f1f1f1;
+
+    /* Primary UI */
+    --primary: #d4d4d8;
+    --primary-foreground: #171717;
+
+    /* Secondary UI */
+    --secondary: #27272a;
+    --secondary-foreground: #f1f1f1;
+
+    /* Muted */
+    --muted: #27272a;
+    --muted-foreground: #a1a1aa;
+
+    /* Accent */
+    --accent: #27272a;
+    --accent-foreground: #f1f1f1;
+
+    /* Destructive */
+    --destructive: #dc2626;
+    --destructive-foreground: #f1f1f1;
+
+    /* Form + border controls */
+    --border: #505050a3;
+    --input: #27272a;
+    --ring: #d4d4d8;
+
+    /* Sidebar */
+    --sidebar-background: #202024;
+    --sidebar-foreground: #f1f1f1;
+    --sidebar-primary: #d4d4d8;
+    --sidebar-primary-foreground: #171717;
+    --sidebar-accent: #202024;
+    --sidebar-accent-foreground: #f1f1f1;
+    --sidebar-border: #27272a;
+    --sidebar-ring: #d4d4d8;
+  }
+
+  /* === UNIVERSAL BASE STYLES === */
+
+  /* All elements get default border color */
+  * {
+    @apply border-border;
+  }
+
+  /* Main body setup */
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;  /* Typographic ligatures */
+    font-family: 'sans-serif', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+
+    background: var(--background);             /* Gradient or solid */
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  /* Form field focus: remove default browser outline */
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: none !important;
+  }
+
+  /* Typography styles for headings */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+  }
+
+  /* Hero-specific typography classes */
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .hero-title-italic {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-style: italic;
+  }
+}
+
+/* -------------------------------------
+   COMPONENTS LAYER: UI Classes
+-------------------------------------- */
+@layer components {
+  /* Frosted glass container (light) */
+  .glass {
+    @apply backdrop-blur-xl bg-white/80 border border-gray-200/50;
+  }
+
+  /* Frosted glass container (dark) */
+  .glass-dark {
+    @apply backdrop-blur-xl bg-black/60 border border-gray-800/50;
+  }
+
+  /* Hover state for glass (light) */
+  .glass-hover {
+    @apply hover:bg-white/90 transition-all duration-300;
+  }
+
+  /* Hover state for glass (dark) */
+  .glass-hover-dark {
+    @apply hover:bg-black/70 transition-all duration-300;
+  }
+
+  /* Hero section background */
+  .ocean-hero {
+    background-image: url("/public/black-white-portrait-digital-nomads.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* Transparent black gradient overlay */
+  .deploja-gradient {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.3) 100%);
+  }
+
+  /* Primary button style (dark mode) */
+  .kimi-button {
+    @apply bg-gray-900 text-white hover:bg-gray-800 transition-all duration-200 rounded-xl px-6 py-3 font-medium;
+  }
+
+  /* Light-themed button variant */
+  .kimi-button-light {
+    @apply bg-white text-gray-900 hover:bg-gray-50 border border-gray-200 transition-all duration-200 rounded-xl px-6 py-3 font-medium;
+  }
+}
+
+/* -------------------------------------
+   SCROLLBAR STYLING
+-------------------------------------- */
+
+/* Set scrollbar width */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Scrollbar background (track) */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Scrollbar thumb (the draggable bar) */
+::-webkit-scrollbar-thumb {
+  background: rgba(107, 114, 128, 0.3);     /* Tailwind gray-500 */
+  border-radius: 2px;
+}
+
+/* On hover, scrollbar becomes more visible */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(107, 114, 128, 0.5);
+}
+
+/* Dark mode: scrollbar thumb */
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.3);     /* Tailwind gray-400 */
+}
+
+/* Dark mode: thumb on hover */
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.5);
+}
