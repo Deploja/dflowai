@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
@@ -26,7 +25,7 @@ export function OrganizationSettings() {
     email_notifications: true,
     public_profile: true,
     auto_assignments: false,
-    require_approval: true
+    require_approval: true,
   });
 
   const [locations, setLocations] = useState<string[]>([]);
@@ -39,12 +38,12 @@ export function OrganizationSettings() {
     try {
       // Direct query to organization_settings table with proper error handling
       const { data, error } = await supabase
-        .from('organization_settings' as any)
-        .select('*')
+        .from("organization_settings" as any)
+        .select("*")
         .limit(1);
 
       if (error) {
-        console.error('Error querying organization_settings:', error);
+        console.error("Error querying organization_settings:", error);
         // Set default values if table doesn't exist or is empty
         setLocations(["Stockholm, Sweden"]);
         return;
@@ -66,7 +65,7 @@ export function OrganizationSettings() {
           email_notifications: orgSettings.email_notifications ?? true,
           public_profile: orgSettings.public_profile ?? true,
           auto_assignments: orgSettings.auto_assignments ?? false,
-          require_approval: orgSettings.require_approval ?? true
+          require_approval: orgSettings.require_approval ?? true,
         });
         setLocations(orgSettings.locations || ["Stockholm, Sweden"]);
       } else {
@@ -74,18 +73,21 @@ export function OrganizationSettings() {
         setLocations(["Stockholm, Sweden"]);
       }
     } catch (error: any) {
-      console.error('Error loading organization settings:', error);
+      console.error("Error loading organization settings:", error);
       setLocations(["Stockholm, Sweden"]);
       toast({
         title: "Error",
         description: "Failed to load organization settings",
-        variant: "destructive"
+        variant: "destructive",
       });
     }
   };
 
-  const handleInputChange = (field: string, value: string | boolean | number) => {
-    setOrgData(prev => ({ ...prev, [field]: value }));
+  const handleInputChange = (
+    field: string,
+    value: string | boolean | number
+  ) => {
+    setOrgData((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleSave = async () => {
@@ -93,25 +95,25 @@ export function OrganizationSettings() {
       setLoading(true);
 
       const { error } = await supabase
-        .from('organization_settings' as any)
+        .from("organization_settings" as any)
         .upsert({
           ...orgData,
           locations,
-          updated_at: new Date().toISOString()
+          updated_at: new Date().toISOString(),
         });
 
       if (error) throw error;
 
       toast({
         title: "Success",
-        description: "Organization settings saved successfully!"
+        description: "Organization settings saved successfully!",
       });
     } catch (error: any) {
-      console.error('Error saving organization settings:', error);
+      console.error("Error saving organization settings:", error);
       toast({
         title: "Error",
         description: error.message || "Failed to save organization settings",
-        variant: "destructive"
+        variant: "destructive",
       });
     } finally {
       setLoading(false);
@@ -120,18 +122,30 @@ export function OrganizationSettings() {
 
   return (
     <div className="space-y-6">
-      <CompanyInformationSection orgData={orgData} onInputChange={handleInputChange} />
-      
-      <LocationsSection locations={locations} setLocations={setLocations} />
-      
-      <RegionalSettingsSection orgData={orgData} onInputChange={handleInputChange} />
-      
-      <WorkingHoursSection orgData={orgData} onInputChange={handleInputChange} />
-      
-      <SystemPreferencesSection orgData={orgData} onInputChange={handleInputChange} />
+      <CompanyInformationSection
+        orgData={orgData}
+        onInputChange={handleInputChange}
+      />
 
-      <Button 
-        onClick={handleSave} 
+      <LocationsSection locations={locations} setLocations={setLocations} />
+
+      <RegionalSettingsSection
+        orgData={orgData}
+        onInputChange={handleInputChange}
+      />
+
+      <WorkingHoursSection
+        orgData={orgData}
+        onInputChange={handleInputChange}
+      />
+
+      <SystemPreferencesSection
+        orgData={orgData}
+        onInputChange={handleInputChange}
+      />
+
+      <Button
+        onClick={handleSave}
         className="bg-emerald-600 hover:bg-emerald-700 text-white"
         disabled={loading}
       >

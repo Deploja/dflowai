@@ -1,14 +1,19 @@
-
 import { Link, Navigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { useAuth } from "@/components/AuthProvider";
-import { 
-  Sparkles, 
-  Users, 
-  MessageSquare, 
+import {
+  Sparkles,
+  Users,
+  MessageSquare,
   Calendar,
   BarChart3,
   Zap,
@@ -18,7 +23,7 @@ import {
   Star,
   Play,
   LogIn,
-  UserPlus
+  UserPlus,
 } from "lucide-react";
 
 const Index = () => {
@@ -41,54 +46,59 @@ const Index = () => {
     {
       icon: Users,
       title: "AI-Matching",
-      description: "Intelligent matching of consultants with Microsoft Graph and JobTech API"
+      description:
+        "Intelligent matching of consultants with Microsoft Graph and JobTech API",
     },
     {
       icon: MessageSquare,
       title: "Smart Messaging",
-      description: "Automated message flow with AI-generated texts and SMS"
+      description: "Automated message flow with AI-generated texts and SMS",
     },
     {
       icon: Users,
       title: "CV Management",
-      description: "AI-generated CVs with multilingual translation and export"
+      description: "AI-generated CVs with multilingual translation and export",
     },
     {
       icon: Calendar,
       title: "Resource Planning",
-      description: "Drag-and-drop calendar with intelligent utilization analysis"
+      description:
+        "Drag-and-drop calendar with intelligent utilization analysis",
     },
     {
       icon: BarChart3,
       title: "Analytics & KPIs",
-      description: "Real-time data with forecasts and financial tracking"
+      description: "Real-time data with forecasts and financial tracking",
     },
     {
       icon: Shield,
       title: "Secure Sharing",
-      description: "Partner network with controlled access and tracking"
-    }
+      description: "Partner network with controlled access and tracking",
+    },
   ];
 
   const testimonials = [
     {
       name: "Emma Anderson",
       role: "CEO, TechConsult AB",
-      content: "DflowAI has revolutionized our consultant brokerage. AI matching saves us hours every day.",
-      rating: 5
+      content:
+        "DflowAI has revolutionized our consultant brokerage. AI matching saves us hours every day.",
+      rating: 5,
     },
     {
       name: "Marcus Johansson",
       role: "HR Manager, InnovateIT",
-      content: "Fantastic platform! The automation of CV management and message flow is worth its weight in gold.",
-      rating: 5
+      content:
+        "Fantastic platform! The automation of CV management and message flow is worth its weight in gold.",
+      rating: 5,
     },
     {
       name: "Lisa Chen",
       role: "Project Manager, CodeExperts",
-      content: "The best investment we've made. Resource planning has never been easier.",
-      rating: 5
-    }
+      content:
+        "The best investment we've made. Resource planning has never been easier.",
+      rating: 5,
+    },
   ];
 
   return (
@@ -96,7 +106,7 @@ const Index = () => {
       {/* Hero Section with Ocean Background covering full viewport */}
       <section className="relative h-screen ocean-hero">
         <div className="absolute inset-0 deploja-gradient"></div>
-        
+
         {/* Header with Navigation - positioned over hero */}
         <header className="absolute top-0 left-0 right-0 z-50 glass dark:glass-dark border-b border-white/10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -107,15 +117,20 @@ const Index = () => {
                     DFLOW
                   </span>
                   <Sparkles className="h-5 w-5 text-white/80" />
-                  <span className="text-2xl font-bold text-white/90 font-deploja tracking-wider">AI</span>
+                  <span className="text-2xl font-bold text-white/90 font-deploja tracking-wider">
+                    AI
+                  </span>
                 </div>
               </div>
-              
+
               <div className="flex items-center space-x-4">
                 <ThemeToggle />
                 <div className="flex items-center space-x-3">
                   <Link to="/auth">
-                    <Button variant="ghost" className="text-white/90 hover:text-white hover:bg-white/10 font-medium">
+                    <Button
+                      variant="ghost"
+                      className="text-white/90 hover:text-white hover:bg-white/10 font-medium"
+                    >
                       <LogIn className="mr-2 h-4 w-4" />
                       Sign In
                     </Button>
@@ -138,24 +153,35 @@ const Index = () => {
               <div className="text-sm text-white/80 mb-4 font-sans">
                 Consulting Services in IT, Tech & Management
               </div>
-              
+
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-light mb-6 tracking-tight hero-title">
                 Welcome to a
               </h1>
               <h2 className="text-5xl md:text-7xl lg:text-8xl font-light mb-8 tracking-tight hero-title-italic">
                 Freer life as a consultant
               </h2>
-              
+
               <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-4xl leading-relaxed font-light font-sans">
-                As an employed consultant at DflowAI, you as a consultant get to experience an unbeatable feeling of freedom! Here you are not just an employee, but also as close to an entrepreneur as you can get. Explore a world of possibilities and independence, with all the benefits that come with being part of our dynamic team!
+                As an employed consultant at DflowAI, you as a consultant get to
+                experience an unbeatable feeling of freedom! Here you are not
+                just an employee, but also as close to an entrepreneur as you
+                can get. Explore a world of possibilities and independence, with
+                all the benefits that come with being part of our dynamic team!
               </p>
-              
+
               <div className="flex flex-col sm:flex-row gap-4 mb-16">
-                <Button size="lg" className="bg-white hover:bg-gray-100 text-gray-900 font-semibold px-10 py-4 text-lg rounded-lg border-0">
+                <Button
+                  size="lg"
+                  className="bg-white hover:bg-gray-100 text-gray-900 font-semibold px-10 py-4 text-lg rounded-lg border-0"
+                >
                   Need consulting services?
                 </Button>
-                
-                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-gray-900 px-10 py-4 text-lg font-semibold rounded-lg">
+
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-white text-white hover:bg-white hover:text-gray-900 px-10 py-4 text-lg font-semibold rounded-lg"
+                >
                   Work at DflowAI
                 </Button>
               </div>
@@ -172,20 +198,26 @@ const Index = () => {
               Powerful AI Features
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto font-light">
-              Discover how DflowAI transforms the consulting industry with intelligent automation
+              Discover how DflowAI transforms the consulting industry with
+              intelligent automation
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => {
               const Icon = feature.icon;
               return (
-                <Card key={index} className="glass dark:glass-dark border-gray-200/50 dark:border-gray-800/50 group transition-all duration-300 hover:scale-[1.02]">
+                <Card
+                  key={index}
+                  className="glass dark:glass-dark border-gray-200/50 dark:border-gray-800/50 group transition-all duration-300 hover:scale-[1.02]"
+                >
                   <CardHeader>
                     <div className="w-14 h-14 rounded-xl bg-gray-900 dark:bg-gray-100 p-3 mb-6 group-hover:scale-110 transition-transform duration-300">
                       <Icon className="w-full h-full text-white dark:text-black" />
                     </div>
-                    <CardTitle className="text-xl font-semibold text-gray-900 dark:text-gray-100">{feature.title}</CardTitle>
+                    <CardTitle className="text-xl font-semibold text-gray-900 dark:text-gray-100">
+                      {feature.title}
+                    </CardTitle>
                   </CardHeader>
                   <CardContent>
                     <CardDescription className="text-base leading-relaxed text-gray-600 dark:text-gray-400">
@@ -210,14 +242,20 @@ const Index = () => {
               Over 500+ companies trust DflowAI for their consultant brokerage
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <Card key={index} className="glass dark:glass-dark border-gray-200/50 dark:border-gray-800/50 text-center">
+              <Card
+                key={index}
+                className="glass dark:glass-dark border-gray-200/50 dark:border-gray-800/50 text-center"
+              >
                 <CardHeader>
                   <div className="flex justify-center mb-6">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 text-gray-400 fill-current" />
+                      <Star
+                        key={i}
+                        className="w-5 h-5 text-gray-400 fill-current"
+                      />
                     ))}
                   </div>
                   <CardDescription className="text-base italic mb-6 text-gray-600 dark:text-gray-400">
@@ -225,8 +263,12 @@ const Index = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="font-semibold text-gray-900 dark:text-gray-100">{testimonial.name}</div>
-                  <div className="text-sm text-gray-500 dark:text-gray-500">{testimonial.role}</div>
+                  <div className="font-semibold text-gray-900 dark:text-gray-100">
+                    {testimonial.name}
+                  </div>
+                  <div className="text-sm text-gray-500 dark:text-gray-500">
+                    {testimonial.role}
+                  </div>
                 </CardContent>
               </Card>
             ))}
@@ -243,24 +285,32 @@ const Index = () => {
                 Ready to Revolutionize Your Business?
               </CardTitle>
               <CardDescription className="text-xl mb-8 text-gray-600 dark:text-gray-400 font-light">
-                Start your journey with DflowAI today and see the difference AI can make
+                Start your journey with DflowAI today and see the difference AI
+                can make
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
                 <Link to="/auth">
-                  <Button size="lg" className="bg-gray-900 hover:bg-gray-800 text-white dark:bg-gray-100 dark:hover:bg-gray-200 dark:text-black font-semibold px-12 py-4 text-lg rounded-xl">
+                  <Button
+                    size="lg"
+                    className="bg-gray-900 hover:bg-gray-800 text-white dark:bg-gray-100 dark:hover:bg-gray-200 dark:text-black font-semibold px-12 py-4 text-lg rounded-xl"
+                  >
                     Start Free Demo
                     <Sparkles className="ml-2 h-5 w-5" />
                   </Button>
                 </Link>
-                
-                <Button size="lg" variant="outline" className="border-gray-300 dark:border-gray-600 text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 px-12 py-4 text-lg font-semibold rounded-xl">
+
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-gray-300 dark:border-gray-600 text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 px-12 py-4 text-lg font-semibold rounded-xl"
+                >
                   Contact Sales Team
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </div>
-              
+
               <div className="flex items-center justify-center space-x-8 text-sm text-gray-500 dark:text-gray-500">
                 <div className="flex items-center">
                   <CheckCircle className="w-4 h-4 text-gray-600 dark:text-gray-400 mr-2" />
@@ -289,7 +339,9 @@ const Index = () => {
                 DFLOW
               </span>
               <Sparkles className="h-4 w-4 text-gray-600 dark:text-gray-400" />
-              <span className="text-xl font-bold text-gray-700 dark:text-gray-300 font-deploja tracking-wider">AI</span>
+              <span className="text-xl font-bold text-gray-700 dark:text-gray-300 font-deploja tracking-wider">
+                AI
+              </span>
             </div>
           </div>
           <p className="text-gray-500 dark:text-gray-500">

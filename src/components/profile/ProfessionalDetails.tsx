@@ -77,7 +77,6 @@ export function ProfessionalDetails({
               </div>
             </div>
           </div>
-
           <div>
             <h3 className="font-semibold text-gray-700 mb-3">Education</h3>
             <div className="space-y-2">

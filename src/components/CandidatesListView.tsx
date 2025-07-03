@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Table, TableBody } from "@/components/ui/table";
@@ -13,22 +12,31 @@ import { CandidatesListViewProps } from "@/types/candidate";
 
 const ITEMS_PER_PAGE = 15;
 
-export function CandidatesListView({ onAddCandidate }: CandidatesListViewProps) {
+export function CandidatesListView({
+  onAddCandidate,
+}: CandidatesListViewProps) {
   const [currentPage, setCurrentPage] = useState(1);
-  const { consultants, isLoading, error, handleSort, sortConfig } = useCandidatesData();
+  const { consultants, isLoading, error, handleSort, sortConfig } =
+    useCandidatesData();
 
   // For now, show all consultants - filtering will be handled by the filter component
   const filteredConsultants = consultants || [];
 
   const totalPages = Math.ceil(filteredConsultants.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const paginatedConsultants = filteredConsultants.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+  const paginatedConsultants = filteredConsultants.slice(
+    startIndex,
+    startIndex + ITEMS_PER_PAGE
+  );
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
 
-  const handleSortWithPageReset = (field: string, direction: "asc" | "desc") => {
+  const handleSortWithPageReset = (
+    field: string,
+    direction: "asc" | "desc"
+  ) => {
     handleSort(field, direction);
     setCurrentPage(1); // Reset to first page when sorting
   };
@@ -65,15 +73,15 @@ export function CandidatesListView({ onAddCandidate }: CandidatesListViewProps) 
       </div>
 
       {/* Pipeline Filter Component */}
-      <CandidatePipelineFilter 
+      <CandidatePipelineFilter
         onAddCandidate={onAddCandidate}
         candidateCount={filteredConsultants.length}
       />
 
       {/* Sort Controls */}
       <div className="px-6 py-2 border-b border-gray-200">
-        <CandidateSortDropdown 
-          onSort={handleSortWithPageReset} 
+        <CandidateSortDropdown
+          onSort={handleSortWithPageReset}
           currentSort={sortConfig}
         />
       </div>

@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -44,7 +43,7 @@ export function CandidatePipelineFilter({
     if (checked) {
       setSelectedResponsible([...selectedResponsible, userId]);
     } else {
-      setSelectedResponsible(selectedResponsible.filter(id => id !== userId));
+      setSelectedResponsible(selectedResponsible.filter((id) => id !== userId));
     }
   };
 
@@ -52,7 +51,7 @@ export function CandidatePipelineFilter({
     if (checked) {
       setSelectedStatuses([...selectedStatuses, statusId]);
     } else {
-      setSelectedStatuses(selectedStatuses.filter(id => id !== statusId));
+      setSelectedStatuses(selectedStatuses.filter((id) => id !== statusId));
     }
   };
 
@@ -72,13 +71,16 @@ export function CandidatePipelineFilter({
     }
   };
 
-  const activeFiltersCount = selectedResponsible.length + selectedStatuses.length + (activityDate ? 1 : 0);
+  const activeFiltersCount =
+    selectedResponsible.length +
+    selectedStatuses.length +
+    (activityDate ? 1 : 0);
 
   return (
     <div className="bg-white border-b border-gray-200 px-4 py-3">
       <div className="flex items-center space-x-6 mb-3">
         {/* Add Button */}
-        <Button 
+        <Button
           onClick={onAddCandidate}
           className="bg-emerald-600 hover:bg-emerald-700 text-white font-medium px-4 py-2 rounded"
         >
@@ -102,7 +104,10 @@ export function CandidatePipelineFilter({
           <span className="text-gray-700 text-sm">Pipeline</span>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="text-emerald-600 hover:bg-gray-100 px-2">
+              <Button
+                variant="ghost"
+                className="text-emerald-600 hover:bg-gray-100 px-2"
+              >
                 Consultant Pipeline
                 <ChevronDown className="h-4 w-4 ml-1" />
               </Button>
@@ -118,10 +123,16 @@ export function CandidatePipelineFilter({
         {/* Responsible Filter */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="text-gray-900 hover:bg-gray-100 px-3 py-2">
+            <Button
+              variant="ghost"
+              className="text-gray-900 hover:bg-gray-100 px-3 py-2"
+            >
               Responsible
               {selectedResponsible.length > 0 && (
-                <Badge variant="secondary" className="ml-2 text-xs bg-gray-200 text-gray-900">
+                <Badge
+                  variant="secondary"
+                  className="ml-2 text-xs bg-gray-200 text-gray-900"
+                >
                   {selectedResponsible.length}
                 </Badge>
               )}
@@ -135,11 +146,11 @@ export function CandidatePipelineFilter({
                   <Checkbox
                     id={`responsible-${user.id}`}
                     checked={selectedResponsible.includes(user.id)}
-                    onCheckedChange={(checked) => 
+                    onCheckedChange={(checked) =>
                       handleResponsibleChange(user.id, checked as boolean)
                     }
                   />
-                  <label 
+                  <label
                     htmlFor={`responsible-${user.id}`}
                     className="text-sm font-medium text-gray-900 cursor-pointer flex-1"
                   >
@@ -162,7 +173,10 @@ export function CandidatePipelineFilter({
         {/* Status Filter */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="text-gray-900 hover:bg-gray-100 px-3 py-2">
+            <Button
+              variant="ghost"
+              className="text-gray-900 hover:bg-gray-100 px-3 py-2"
+            >
               Status
               {selectedStatuses.length > 0 && (
                 <Badge className="ml-2 text-xs bg-blue-600 text-white">
@@ -179,12 +193,12 @@ export function CandidatePipelineFilter({
                   <Checkbox
                     id={`status-${status.id}`}
                     checked={selectedStatuses.includes(status.id)}
-                    onCheckedChange={(checked) => 
+                    onCheckedChange={(checked) =>
                       handleStatusChange(status.id, checked as boolean)
                     }
                   />
                   <div className={`w-2 h-2 rounded-full ${status.color}`}></div>
-                  <label 
+                  <label
                     htmlFor={`status-${status.id}`}
                     className="text-sm font-medium text-gray-900 cursor-pointer flex-1"
                   >
@@ -197,7 +211,10 @@ export function CandidatePipelineFilter({
         </DropdownMenu>
 
         {/* Custom Filter Button */}
-        <Button variant="ghost" className="text-gray-900 hover:bg-gray-100 px-3 py-2">
+        <Button
+          variant="ghost"
+          className="text-gray-900 hover:bg-gray-100 px-3 py-2"
+        >
           Custom Filter
           <Filter className="h-4 w-4 ml-2" />
           {activeFiltersCount > 0 && (

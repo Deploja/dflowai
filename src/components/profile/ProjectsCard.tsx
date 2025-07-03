@@ -1,10 +1,15 @@
-
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Edit2, Check, X, Plus, ExternalLink } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -39,7 +44,7 @@ export function ProjectsCard({ userId, isOwnProfile }: ProjectsCardProps) {
     end_date: "",
     technologies: "",
     client_name: "",
-    project_url: ""
+    project_url: "",
   });
   const { toast } = useToast();
 
@@ -50,15 +55,15 @@ export function ProjectsCard({ userId, isOwnProfile }: ProjectsCardProps) {
   const loadProjects = async () => {
     try {
       const { data, error } = await supabase
-        .from('projects')
-        .select('*')
-        .eq('user_id', userId)
-        .order('start_date', { ascending: false });
+        .from("projects")
+        .select("*")
+        .eq("user_id", userId)
+        .order("start_date", { ascending: false });
 
       if (error) throw error;
       setProjects(data || []);
     } catch (error) {
-      console.error('Error loading projects:', error);
+      console.error("Error loading projects:", error);
     }
   };
 
@@ -67,7 +72,7 @@ export function ProjectsCard({ userId, isOwnProfile }: ProjectsCardProps) {
 
     try {
       const { data, error } = await supabase
-        .from('projects')
+        .from("projects")
         .insert({
           user_id: userId,
           title: newProject.title,
@@ -75,16 +80,19 @@ export function ProjectsCard({ userId, isOwnProfile }: ProjectsCardProps) {
           status: newProject.status,
           start_date: newProject.start_date,
           end_date: newProject.end_date || null,
-          technologies: newProject.technologies.split(',').map(t => t.trim()).filter(t => t),
+          technologies: newProject.technologies
+            .split(",")
+            .map((t) => t.trim())
+            .filter((t) => t),
           client_name: newProject.client_name || null,
-          project_url: newProject.project_url || null
+          project_url: newProject.project_url || null,
         })
         .select()
         .single();
 
       if (error) throw error;
 
-      setProjects(prev => [data, ...prev]);
+      setProjects((prev) => [data, ...prev]);
       setNewProject({
         title: "",
         description: "",
@@ -93,7 +101,7 @@ export function ProjectsCard({ userId, isOwnProfile }: ProjectsCardProps) {
         end_date: "",
         technologies: "",
         client_name: "",
-        project_url: ""
+        project_url: "",
       });
       setIsAdding(false);
       toast({
@@ -101,7 +109,7 @@ export function ProjectsCard({ userId, isOwnProfile }: ProjectsCardProps) {
         description: "Your project has been added successfully.",
       });
     } catch (error) {
-      console.error('Error adding project:', error);
+      console.error("Error adding project:", error);
       toast({
         title: "Error",
         description: "Failed to add project.",
@@ -112,16 +120,23 @@ export function ProjectsCard({ userId, isOwnProfile }: ProjectsCardProps) {
 
   const getStatusBadgeVariant = (status: string) => {
     switch (status) {
-      case 'active': return 'default';
-      case 'completed': return 'secondary';
-      case 'paused': return 'outline';
-      case 'cancelled': return 'destructive';
-      default: return 'outline';
+      case "active":
+        return "default";
+      case "completed":
+        return "secondary";
+      case "paused":
+        return "outline";
+      case "cancelled":
+        return "destructive";
+      default:
+        return "outline";
     }
   };
 
-  const activeProjects = projects.filter(p => p.status === 'active');
-  const recentProjects = projects.filter(p => p.status !== 'active').slice(0, 3);
+  const activeProjects = projects.filter((p) => p.status === "active");
+  const recentProjects = projects
+    .filter((p) => p.status !== "active")
+    .slice(0, 3);
 
   return (
     <Card>
@@ -129,7 +144,11 @@ export function ProjectsCard({ userId, isOwnProfile }: ProjectsCardProps) {
         <div className="flex items-center justify-between">
           <CardTitle className="text-lg">Projects</CardTitle>
           {isOwnProfile && (
-            <Button variant="ghost" size="sm" onClick={() => setIsAdding(!isAdding)}>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setIsAdding(!isAdding)}
+            >
               <Plus className="h-4 w-4" />
             </Button>
           )}
@@ -141,12 +160,16 @@ export function ProjectsCard({ userId, isOwnProfile }: ProjectsCardProps) {
             <div className="grid grid-cols-2 gap-2">
               <Input
                 value={newProject.title}
-                onChange={(e) => setNewProject(prev => ({ ...prev, title: e.target.value }))}
+                onChange={(e) =>
+                  setNewProject((prev) => ({ ...prev, title: e.target.value }))
+                }
                 placeholder="Project title"
               />
               <Select
                 value={newProject.status}
-                onValueChange={(value) => setNewProject(prev => ({ ...prev, status: value }))}
+                onValueChange={(value) =>
+                  setNewProject((prev) => ({ ...prev, status: value }))
+                }
               >
                 <SelectTrigger>
                   <SelectValue />
@@ -161,7 +184,12 @@ export function ProjectsCard({ userId, isOwnProfile }: ProjectsCardProps) {
             </div>
             <Textarea
               value={newProject.description}
-              onChange={(e) => setNewProject(prev => ({ ...prev, description: e.target.value }))}
+              onChange={(e) =>
+                setNewProject((prev) => ({
+                  ...prev,
+                  description: e.target.value,
+                }))
+              }
               placeholder="Project description"
               rows={2}
             />
@@ -169,30 +197,55 @@ export function ProjectsCard({ userId, isOwnProfile }: ProjectsCardProps) {
               <Input
                 type="date"
                 value={newProject.start_date}
-                onChange={(e) => setNewProject(prev => ({ ...prev, start_date: e.target.value }))}
+                onChange={(e) =>
+                  setNewProject((prev) => ({
+                    ...prev,
+                    start_date: e.target.value,
+                  }))
+                }
                 placeholder="Start date"
               />
               <Input
                 type="date"
                 value={newProject.end_date}
-                onChange={(e) => setNewProject(prev => ({ ...prev, end_date: e.target.value }))}
+                onChange={(e) =>
+                  setNewProject((prev) => ({
+                    ...prev,
+                    end_date: e.target.value,
+                  }))
+                }
                 placeholder="End date (optional)"
               />
             </div>
             <Input
               value={newProject.technologies}
-              onChange={(e) => setNewProject(prev => ({ ...prev, technologies: e.target.value }))}
+              onChange={(e) =>
+                setNewProject((prev) => ({
+                  ...prev,
+                  technologies: e.target.value,
+                }))
+              }
               placeholder="Technologies (comma separated)"
             />
             <div className="grid grid-cols-2 gap-2">
               <Input
                 value={newProject.client_name}
-                onChange={(e) => setNewProject(prev => ({ ...prev, client_name: e.target.value }))}
+                onChange={(e) =>
+                  setNewProject((prev) => ({
+                    ...prev,
+                    client_name: e.target.value,
+                  }))
+                }
                 placeholder="Client name (optional)"
               />
               <Input
                 value={newProject.project_url}
-                onChange={(e) => setNewProject(prev => ({ ...prev, project_url: e.target.value }))}
+                onChange={(e) =>
+                  setNewProject((prev) => ({
+                    ...prev,
+                    project_url: e.target.value,
+                  }))
+                }
                 placeholder="Project URL (optional)"
               />
             </div>
@@ -201,7 +254,11 @@ export function ProjectsCard({ userId, isOwnProfile }: ProjectsCardProps) {
                 <Check className="h-4 w-4 mr-1" />
                 Add
               </Button>
-              <Button variant="outline" size="sm" onClick={() => setIsAdding(false)}>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setIsAdding(false)}
+              >
                 <X className="h-4 w-4 mr-1" />
                 Cancel
               </Button>
@@ -223,18 +280,28 @@ export function ProjectsCard({ userId, isOwnProfile }: ProjectsCardProps) {
                           {project.status}
                         </Badge>
                         {project.project_url && (
-                          <a href={project.project_url} target="_blank" rel="noopener noreferrer">
+                          <a
+                            href={project.project_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
                             <ExternalLink className="h-3 w-3" />
                           </a>
                         )}
                       </div>
                       {project.description && (
-                        <p className="text-muted-foreground mt-1">{project.description}</p>
+                        <p className="text-muted-foreground mt-1">
+                          {project.description}
+                        </p>
                       )}
                       {project.technologies.length > 0 && (
                         <div className="flex flex-wrap gap-1 mt-1">
                           {project.technologies.map((tech, index) => (
-                            <Badge key={index} variant="outline" className="text-xs">
+                            <Badge
+                              key={index}
+                              variant="outline"
+                              className="text-xs"
+                            >
                               {tech}
                             </Badge>
                           ))}
@@ -260,13 +327,19 @@ export function ProjectsCard({ userId, isOwnProfile }: ProjectsCardProps) {
                       {project.status}
                     </Badge>
                     {project.project_url && (
-                      <a href={project.project_url} target="_blank" rel="noopener noreferrer">
+                      <a
+                        href={project.project_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         <ExternalLink className="h-3 w-3" />
                       </a>
                     )}
                   </div>
                   {project.client_name && (
-                    <p className="text-muted-foreground text-xs">Client: {project.client_name}</p>
+                    <p className="text-muted-foreground text-xs">
+                      Client: {project.client_name}
+                    </p>
                   )}
                 </div>
               ))}

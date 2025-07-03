@@ -51,7 +51,7 @@ export function useProfileData() {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { toast } = useToast();
-  
+
   const [consultant, setConsultant] = useState<ConsultantProfile | null>(null);
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [activityStatus, setActivityStatus] = useState<ActivityStatus>({ status: 'offline', last_seen: '' });
@@ -87,18 +87,18 @@ export function useProfileData() {
 
       if (consultantData) {
         setConsultant(consultantData);
-        
+
         // Check if this is the user's own consultant profile
         if (user && consultantData.email === user.email) {
           setIsOwnProfile(true);
-          
+
           // Load user profile data for additional info
           const { data: profileData } = await supabase
             .from('profiles')
             .select('*')
             .eq('id', user.id)
             .maybeSingle();
-          
+
           if (profileData) {
             setUserProfile(profileData);
           }
@@ -118,7 +118,7 @@ export function useProfileData() {
         if (profileData) {
           setUserProfile(profileData);
           setIsOwnProfile(user?.id === consultantId);
-          
+
           if (user?.id === consultantId) {
             await loadActivityStatus();
             await loadSkills();

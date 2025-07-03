@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -28,10 +27,17 @@ interface ConsultantsListProps {
 }
 
 export function ConsultantsList({ onAddConsultant }: ConsultantsListProps) {
-  const [editingConsultant, setEditingConsultant] = useState<Consultant | null>(null);
+  const [editingConsultant, setEditingConsultant] = useState<Consultant | null>(
+    null
+  );
   const [showEditForm, setShowEditForm] = useState(false);
 
-  const { data: consultants, isLoading, error, refetch } = useQuery({
+  const {
+    data: consultants,
+    isLoading,
+    error,
+    refetch,
+  } = useQuery({
     queryKey: ["consultants"],
     queryFn: async () => {
       console.log("Fetching candidates...");

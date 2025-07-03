@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -29,12 +28,14 @@ export function CVUpload({ onSuccess }: CVUploadProps) {
   };
 
   const extractTextFromFile = async (file: File): Promise<string> => {
-    if (file.type === 'application/pdf') {
+    if (file.type === "application/pdf") {
       return await extractTextFromPDF(file);
-    } else if (file.type === 'text/plain') {
+    } else if (file.type === "text/plain") {
       return await file.text();
     } else {
-      throw new Error('Unsupported file type. Please upload a PDF or TXT file.');
+      throw new Error(
+        "Unsupported file type. Please upload a PDF or TXT file."
+      );
     }
   };
 
@@ -61,29 +62,29 @@ export function CVUpload({ onSuccess }: CVUploadProps) {
 
     try {
       // Upload file to Supabase Storage
-      const fileExt = selectedFile.name.split('.').pop();
+      const fileExt = selectedFile.name.split(".").pop();
       const fileName = `${user.id}/${Date.now()}.${fileExt}`;
-      
+
       const { data: uploadData, error: uploadError } = await supabase.storage
-        .from('cvs')
+        .from("cvs")
         .upload(fileName, selectedFile);
 
       if (uploadError) throw uploadError;
 
       // Get public URL
-      const { data: { publicUrl } } = supabase.storage
-        .from('cvs')
-        .getPublicUrl(fileName);
+      const {
+        data: { publicUrl },
+      } = supabase.storage.from("cvs").getPublicUrl(fileName);
 
       // Create CV record
       const { data: cvData, error: cvError } = await supabase
-        .from('cvs')
+        .from("cvs")
         .insert({
           user_id: user.id,
           title,
           language,
           file_url: publicUrl,
-          is_parsed: false
+          is_parsed: false,
         })
         .select()
         .single();
@@ -92,7 +93,8 @@ export function CVUpload({ onSuccess }: CVUploadProps) {
 
       toast({
         title: "CV uploaded",
-        description: "Your CV has been uploaded successfully. Starting parsing...",
+        description:
+          "Your CV has been uploaded successfully. Starting parsing...",
       });
 
       // Extract text and parse CV
@@ -100,42 +102,44 @@ export function CVUpload({ onSuccess }: CVUploadProps) {
       const cvText = await extractTextFromFile(selectedFile);
 
       // Call parsing edge function
-      const { data: parseData, error: parseError } = await supabase.functions
-        .invoke('parse-cv', {
+      const { data: parseData, error: parseError } =
+        await supabase.functions.invoke("parse-cv", {
           body: {
             cvText,
             cvId: cvData.id,
-            userId: user.id
-          }
+            userId: user.id,
+          },
         });
 
       if (parseError) {
-        console.error('Parsing error:', parseError);
+        console.error("Parsing error:", parseError);
         toast({
           title: "Parsing completed with warnings",
-          description: "CV uploaded successfully, but parsing encountered some issues.",
+          description:
+            "CV uploaded successfully, but parsing encountered some issues.",
           variant: "destructive",
         });
       } else {
         toast({
           title: "CV processed successfully",
-          description: "Your CV has been uploaded, parsed, and your profile has been updated.",
+          description:
+            "Your CV has been uploaded, parsed, and your profile has been updated.",
         });
       }
 
       setTitle("");
       setSelectedFile(null);
       // Reset file input
-      const fileInput = document.getElementById('cv-file') as HTMLInputElement;
-      if (fileInput) fileInput.value = '';
-      
-      onSuccess?.();
+      const fileInput = document.getElementById("cv-file") as HTMLInputElement;
+      if (fileInput) fileInput.value = "";
 
+      onSuccess?.();
     } catch (error) {
-      console.error('Upload error:', error);
+      console.error("Upload error:", error);
       toast({
         title: "Upload failed",
-        description: error instanceof Error ? error.message : "Failed to upload CV.",
+        description:
+          error instanceof Error ? error.message : "Failed to upload CV.",
         variant: "destructive",
       });
     } finally {
@@ -215,7 +219,8 @@ export function CVUpload({ onSuccess }: CVUploadProps) {
 
         <div className="text-xs text-muted-foreground">
           <FileText className="h-4 w-4 inline mr-1" />
-          Supported formats: PDF, TXT. The CV will be automatically parsed to extract skills, contact information, and experience summary.
+          Supported formats: PDF, TXT. The CV will be automatically parsed to
+          extract skills, contact information, and experience summary.
         </div>
       </CardContent>
     </Card>

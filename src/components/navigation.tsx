@@ -1,16 +1,15 @@
-
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { 
-  Menu, 
-  X, 
-  BarChart3, 
-  Users, 
-  MessageSquare, 
+import {
+  Menu,
+  X,
+  BarChart3,
+  Users,
+  MessageSquare,
   Calendar,
-  Sparkles
+  Sparkles,
 } from "lucide-react";
 
 const Navigation = () => {
@@ -37,7 +36,9 @@ const Navigation = () => {
                 DFLOW
               </span>
               <Sparkles className="h-4 w-4 text-purple-500" />
-              <span className="text-xl font-bold text-foreground/80 font-deploja tracking-wider">AI</span>
+              <span className="text-xl font-bold text-foreground/80 font-deploja tracking-wider">
+                AI
+              </span>
             </div>
           </Link>
 
@@ -65,7 +66,7 @@ const Navigation = () => {
           {/* Theme Toggle & Mobile Menu */}
           <div className="flex items-center space-x-4">
             <ThemeToggle />
-            
+
             {/* Mobile menu button */}
             <Button
               variant="ghost"
@@ -73,7 +74,11 @@ const Navigation = () => {
               className="md:hidden"
               onClick={() => setIsOpen(!isOpen)}
             >
-              {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {isOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
             </Button>
           </div>
         </div>

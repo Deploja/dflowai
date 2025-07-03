@@ -1,4 +1,4 @@
-
+import { Link } from "react-router-dom";
 import {
   Sidebar,
   SidebarContent,
@@ -12,7 +12,10 @@ import { SidebarFooter } from "./sidebar/SidebarFooter";
 
 export function AppSidebar() {
   return (
-    <Sidebar collapsible="icon" className="glass border-r border-gray-200/30 dark:border-gray-800/30">
+    <Sidebar
+      collapsible="icon"
+      className="glass border-r border-gray-200/30 dark:border-gray-800/30"
+    >
       <SidebarHeader className="p-4">
         <div className="flex items-center space-x-3">
           <div className="p-2.5 rounded-xl bg-gray-900 dark:bg-gray-100">
@@ -23,19 +26,21 @@ export function AppSidebar() {
               Dflow
             </span>
             <Sparkles className="h-4 w-4 text-gray-600 dark:text-gray-400" />
-            <span className="text-xl font-bold text-gray-700 dark:text-gray-300">AI</span>
+            <span className="text-xl font-bold text-gray-700 dark:text-gray-300">
+              AI
+            </span>
           </div>
         </div>
       </SidebarHeader>
 
       <UserProfileSection />
-      
+
       <SidebarContent>
         <NavigationMenu />
       </SidebarContent>
 
       <SidebarFooter />
-      
+
       <SidebarRail />
     </Sidebar>
   );

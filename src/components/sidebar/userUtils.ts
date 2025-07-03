@@ -21,7 +21,7 @@ export const loadUserAvatar = async (userId: string) => {
     const { data } = await supabase.storage
       .from('avatars')
       .getPublicUrl(`${userId}.jpg`);
-    
+
     // Check if the file actually exists by trying to fetch it
     const response = await fetch(data.publicUrl);
     if (response.ok) {
@@ -33,7 +33,7 @@ export const loadUserAvatar = async (userId: string) => {
         const { data: altData } = await supabase.storage
           .from('avatars')
           .getPublicUrl(`${userId}.${ext}`);
-        
+
         const altResponse = await fetch(altData.publicUrl);
         if (altResponse.ok) {
           return altData.publicUrl;
@@ -50,7 +50,7 @@ export const loadUserAvatar = async (userId: string) => {
 export const uploadUserAvatar = async (userId: string, file: File) => {
   const fileExt = file.name.split('.').pop();
   const fileName = `${userId}.${fileExt}`;
-  
+
   const { error: uploadError } = await supabase.storage
     .from('avatars')
     .upload(fileName, file, { upsert: true });

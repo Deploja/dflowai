@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Camera } from "lucide-react";
@@ -6,13 +5,13 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/components/AuthProvider";
 import { useToast } from "@/hooks/use-toast";
-import { 
-  getUserDisplayName, 
-  getUserInitials, 
-  getUserRole, 
-  loadUserAvatar, 
+import {
+  getUserDisplayName,
+  getUserInitials,
+  getUserRole,
+  loadUserAvatar,
   uploadUserAvatar,
-  findConsultantProfile 
+  findConsultantProfile,
 } from "./userUtils";
 
 export function UserProfileSection() {
@@ -29,7 +28,9 @@ export function UserProfileSection() {
     }
   }, [user]);
 
-  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const file = event.target.files?.[0];
     if (!file || !user) return;
 
@@ -56,7 +57,7 @@ export function UserProfileSection() {
 
   const handleProfileClick = async () => {
     if (!user) return;
-    
+
     try {
       const consultant = await findConsultantProfile(user.email!);
 
@@ -82,14 +83,19 @@ export function UserProfileSection() {
 
   return (
     <div className="p-4 border-b border-gray-200/30 dark:border-gray-800/30 group-data-[collapsible=icon]:hidden">
-      <div 
+      <div
         className="flex flex-col items-center space-y-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800/50 p-3 rounded-lg transition-colors"
         onClick={handleProfileClick}
       >
         <div className="relative">
           <Avatar className="h-16 w-16">
-            <AvatarImage 
-              src={avatarUrl || `https://api.dicebear.com/7.x/initials/svg?seed=${getUserDisplayName(user)}`} 
+            <AvatarImage
+              src={
+                avatarUrl ||
+                `https://api.dicebear.com/7.x/initials/svg?seed=${getUserDisplayName(
+                  user
+                )}`
+              }
               alt="Profile picture"
             />
             <AvatarFallback className="bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-lg">

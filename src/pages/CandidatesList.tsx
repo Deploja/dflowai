@@ -1,6 +1,9 @@
-
 import { useState } from "react";
-import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
+import {
+  SidebarProvider,
+  SidebarInset,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import { CandidatesListView } from "@/components/CandidatesListView";
 import { AddConsultantForm } from "@/components/AddConsultantForm";
@@ -25,8 +28,10 @@ export default function CandidatesList() {
               <SidebarTrigger className="-ml-1" />
               <h1 className="text-xl font-semibold">Candidates</h1>
             </header>
-            
-            <CandidatesListView onAddCandidate={() => setShowAddCandidate(true)} />
+
+            <CandidatesListView
+              onAddCandidate={() => setShowAddCandidate(true)}
+            />
           </div>
         </SidebarInset>
       </div>

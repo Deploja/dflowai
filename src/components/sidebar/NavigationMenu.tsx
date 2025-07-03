@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Users, ChevronRight, FileText } from "lucide-react";
@@ -18,25 +17,38 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { menuItems, organisationSubItems, candidatesSubItems, cvSubItems } from "./menuConfig";
+import {
+  menuItems,
+  organisationSubItems,
+  candidatesSubItems,
+  cvSubItems,
+} from "./menuConfig";
 
 export function NavigationMenu() {
   const location = useLocation();
   const [isOrganisationOpen, setIsOrganisationOpen] = useState(
-    location.pathname === "/organisation" || location.pathname.startsWith("/organisation")
+    location.pathname === "/organisation" ||
+      location.pathname.startsWith("/organisation")
   );
   const [isCandidatesOpen, setIsCandidatesOpen] = useState(
-    location.pathname === "/consultants" || location.pathname === "/candidates-list"
+    location.pathname === "/consultants" ||
+      location.pathname === "/candidates-list"
   );
   const [isCVOpen, setIsCVOpen] = useState(
     location.pathname.startsWith("/cv/")
   );
 
   useEffect(() => {
-    if (location.pathname === "/organisation" || location.pathname.startsWith("/organisation")) {
+    if (
+      location.pathname === "/organisation" ||
+      location.pathname.startsWith("/organisation")
+    ) {
       setIsOrganisationOpen(true);
     }
-    if (location.pathname === "/consultants" || location.pathname === "/candidates-list") {
+    if (
+      location.pathname === "/consultants" ||
+      location.pathname === "/candidates-list"
+    ) {
       setIsCandidatesOpen(true);
     }
     if (location.pathname.startsWith("/cv/")) {
@@ -56,8 +68,8 @@ export function NavigationMenu() {
             const isActive = location.pathname === item.url;
             return (
               <SidebarMenuItem key={item.title}>
-                <SidebarMenuButton 
-                  asChild 
+                <SidebarMenuButton
+                  asChild
                   isActive={isActive}
                   className="text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 data-[active=true]:bg-gray-900 data-[active=true]:text-white dark:data-[active=true]:bg-gray-100 dark:data-[active=true]:text-black"
                 >
@@ -69,18 +81,22 @@ export function NavigationMenu() {
               </SidebarMenuItem>
             );
           })}
-          
+
           {/* CV Collapsible Menu */}
           <SidebarMenuItem>
             <Collapsible open={isCVOpen} onOpenChange={setIsCVOpen}>
               <CollapsibleTrigger asChild>
-                <SidebarMenuButton 
+                <SidebarMenuButton
                   isActive={location.pathname.startsWith("/cv/")}
                   className="text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 data-[active=true]:bg-gray-900 data-[active=true]:text-white dark:data-[active=true]:bg-gray-100 dark:data-[active=true]:text-black"
                 >
                   <FileText className="h-4 w-4" />
                   <span>CV</span>
-                  <ChevronRight className={`h-4 w-4 ml-auto transition-transform ${isCVOpen ? 'rotate-90' : ''}`} />
+                  <ChevronRight
+                    className={`h-4 w-4 ml-auto transition-transform ${
+                      isCVOpen ? "rotate-90" : ""
+                    }`}
+                  />
                 </SidebarMenuButton>
               </CollapsibleTrigger>
               <CollapsibleContent>
@@ -90,8 +106,8 @@ export function NavigationMenu() {
                     const isSubActive = location.pathname === subItem.url;
                     return (
                       <SidebarMenuSubItem key={subItem.title}>
-                        <SidebarMenuSubButton 
-                          asChild 
+                        <SidebarMenuSubButton
+                          asChild
                           isActive={isSubActive}
                           className="text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 data-[active=true]:bg-gray-900 data-[active=true]:text-white dark:data-[active=true]:bg-gray-100 dark:data-[active=true]:text-black"
                         >
@@ -107,18 +123,28 @@ export function NavigationMenu() {
               </CollapsibleContent>
             </Collapsible>
           </SidebarMenuItem>
-          
+
           {/* Candidates Collapsible Menu */}
           <SidebarMenuItem>
-            <Collapsible open={isCandidatesOpen} onOpenChange={setIsCandidatesOpen}>
+            <Collapsible
+              open={isCandidatesOpen}
+              onOpenChange={setIsCandidatesOpen}
+            >
               <CollapsibleTrigger asChild>
-                <SidebarMenuButton 
-                  isActive={location.pathname === "/consultants" || location.pathname === "/candidates-list"}
+                <SidebarMenuButton
+                  isActive={
+                    location.pathname === "/consultants" ||
+                    location.pathname === "/candidates-list"
+                  }
                   className="text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 data-[active=true]:bg-gray-900 data-[active=true]:text-white dark:data-[active=true]:bg-gray-100 dark:data-[active=true]:text-black"
                 >
                   <Users className="h-4 w-4" />
                   <span>Candidates</span>
-                  <ChevronRight className={`h-4 w-4 ml-auto transition-transform ${isCandidatesOpen ? 'rotate-90' : ''}`} />
+                  <ChevronRight
+                    className={`h-4 w-4 ml-auto transition-transform ${
+                      isCandidatesOpen ? "rotate-90" : ""
+                    }`}
+                  />
                 </SidebarMenuButton>
               </CollapsibleTrigger>
               <CollapsibleContent>
@@ -128,8 +154,8 @@ export function NavigationMenu() {
                     const isSubActive = location.pathname === subItem.url;
                     return (
                       <SidebarMenuSubItem key={subItem.title}>
-                        <SidebarMenuSubButton 
-                          asChild 
+                        <SidebarMenuSubButton
+                          asChild
                           isActive={isSubActive}
                           className="text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 data-[active=true]:bg-gray-900 data-[active=true]:text-white dark:data-[active=true]:bg-gray-100 dark:data-[active=true]:text-black"
                         >
@@ -145,31 +171,41 @@ export function NavigationMenu() {
               </CollapsibleContent>
             </Collapsible>
           </SidebarMenuItem>
-          
+
           {/* Organisation Collapsible Menu */}
           <SidebarMenuItem>
-            <Collapsible open={isOrganisationOpen} onOpenChange={setIsOrganisationOpen}>
+            <Collapsible
+              open={isOrganisationOpen}
+              onOpenChange={setIsOrganisationOpen}
+            >
               <CollapsibleTrigger asChild>
-                <SidebarMenuButton 
+                <SidebarMenuButton
                   isActive={location.pathname === "/organisation"}
                   className="text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 data-[active=true]:bg-gray-900 data-[active=true]:text-white dark:data-[active=true]:bg-gray-100 dark:data-[active=true]:text-black"
                 >
                   <Users className="h-4 w-4" />
                   <span>Organisation</span>
-                  <ChevronRight className={`h-4 w-4 ml-auto transition-transform ${isOrganisationOpen ? 'rotate-90' : ''}`} />
+                  <ChevronRight
+                    className={`h-4 w-4 ml-auto transition-transform ${
+                      isOrganisationOpen ? "rotate-90" : ""
+                    }`}
+                  />
                 </SidebarMenuButton>
               </CollapsibleTrigger>
               <CollapsibleContent>
                 <SidebarMenuSub>
                   {organisationSubItems.map((subItem) => {
                     const SubIcon = subItem.icon;
-                    const isSubActive = location.pathname === "/organisation" && 
-                      (location.search.includes(`tab=${subItem.title.toLowerCase()}`) || 
-                       (subItem.title === "Employees" && !location.search));
+                    const isSubActive =
+                      location.pathname === "/organisation" &&
+                      (location.search.includes(
+                        `tab=${subItem.title.toLowerCase()}`
+                      ) ||
+                        (subItem.title === "Employees" && !location.search));
                     return (
                       <SidebarMenuSubItem key={subItem.title}>
-                        <SidebarMenuSubButton 
-                          asChild 
+                        <SidebarMenuSubButton
+                          asChild
                           isActive={isSubActive}
                           className="text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 data-[active=true]:bg-gray-900 data-[active=true]:text-white dark:data-[active=true]:bg-gray-100 dark:data-[active=true]:text-black"
                         >

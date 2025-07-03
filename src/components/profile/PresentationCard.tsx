@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -19,7 +18,10 @@ interface PresentationCardProps {
   isOwnProfile: boolean;
 }
 
-export function PresentationCard({ userId, isOwnProfile }: PresentationCardProps) {
+export function PresentationCard({
+  userId,
+  isOwnProfile,
+}: PresentationCardProps) {
   const [presentation, setPresentation] = useState<Presentation | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
@@ -34,12 +36,12 @@ export function PresentationCard({ userId, isOwnProfile }: PresentationCardProps
   const loadPresentation = async () => {
     try {
       const { data, error } = await supabase
-        .from('user_presentations')
-        .select('*')
-        .eq('user_id', userId)
+        .from("user_presentations")
+        .select("*")
+        .eq("user_id", userId)
         .maybeSingle();
 
-      if (error && error.code !== 'PGRST116') throw error;
+      if (error && error.code !== "PGRST116") throw error;
 
       if (data) {
         setPresentation(data);
@@ -47,7 +49,7 @@ export function PresentationCard({ userId, isOwnProfile }: PresentationCardProps
         setTempContent(data.content);
       }
     } catch (error) {
-      console.error('Error loading presentation:', error);
+      console.error("Error loading presentation:", error);
     }
   };
 
@@ -55,21 +57,21 @@ export function PresentationCard({ userId, isOwnProfile }: PresentationCardProps
     try {
       if (presentation) {
         const { error } = await supabase
-          .from('user_presentations')
+          .from("user_presentations")
           .update({
             title: tempTitle,
-            content: tempContent
+            content: tempContent,
           })
-          .eq('id', presentation.id);
+          .eq("id", presentation.id);
 
         if (error) throw error;
       } else {
         const { data, error } = await supabase
-          .from('user_presentations')
+          .from("user_presentations")
           .insert({
             user_id: userId,
             title: tempTitle,
-            content: tempContent
+            content: tempContent,
           })
           .select()
           .single();
@@ -78,7 +80,9 @@ export function PresentationCard({ userId, isOwnProfile }: PresentationCardProps
         setPresentation(data);
       }
 
-      setPresentation(prev => prev ? { ...prev, title: tempTitle, content: tempContent } : null);
+      setPresentation((prev) =>
+        prev ? { ...prev, title: tempTitle, content: tempContent } : null
+      );
       setIsEditing(false);
       setIsCreating(false);
       toast({
@@ -86,7 +90,7 @@ export function PresentationCard({ userId, isOwnProfile }: PresentationCardProps
         description: "Your presentation has been saved successfully.",
       });
     } catch (error) {
-      console.error('Error saving presentation:', error);
+      console.error("Error saving presentation:", error);
       toast({
         title: "Error",
         description: "Failed to save presentation.",
@@ -121,7 +125,11 @@ export function PresentationCard({ userId, isOwnProfile }: PresentationCardProps
           <CardTitle className="text-lg">Presentation</CardTitle>
           {isOwnProfile && !isEditing && !isCreating && (
             <Button variant="ghost" size="sm" onClick={startEditing}>
-              {presentation ? <Edit2 className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
+              {presentation ? (
+                <Edit2 className="h-4 w-4" />
+              ) : (
+                <Plus className="h-4 w-4" />
+              )}
             </Button>
           )}
           {(isEditing || isCreating) && (
@@ -160,7 +168,9 @@ export function PresentationCard({ userId, isOwnProfile }: PresentationCardProps
           </div>
         ) : (
           <p className="text-sm text-muted-foreground">
-            {isOwnProfile ? "Click the + button to add your presentation" : "No presentation available"}
+            {isOwnProfile
+              ? "Click the + button to add your presentation"
+              : "No presentation available"}
           </p>
         )}
       </CardContent>

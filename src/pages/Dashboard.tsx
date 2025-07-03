@@ -1,7 +1,16 @@
-
-import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
+import {
+  SidebarProvider,
+  SidebarInset,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { BarChart3, Users, MessageSquare, Calendar } from "lucide-react";
 import { DashboardOverview } from "@/components/DashboardOverview";
 import { DashboardQuickActions } from "@/components/DashboardQuickActions";
@@ -62,11 +71,13 @@ export default function Dashboard() {
                     </CardHeader>
                     <CardContent>
                       <div className="text-2xl font-bold">{stat.value}</div>
-                      <p className={`text-xs ${
-                        stat.changeType === "positive" 
-                          ? "text-green-600" 
-                          : "text-red-600"
-                      }`}>
+                      <p
+                        className={`text-xs ${
+                          stat.changeType === "positive"
+                            ? "text-green-600"
+                            : "text-red-600"
+                        }`}
+                      >
                         {stat.change} from last month
                       </p>
                     </CardContent>
